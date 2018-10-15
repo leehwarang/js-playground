@@ -1,0 +1,28 @@
+<!--사용자가 입력한 수들의 갯수와 합을 구하는 프로그램을 작성해 봅시다. (단 0을 입력받으면 입력 종료)-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+</head>
+<body>
+    <script>
+        var sum = 0;
+        var cnt = 0;
+        while (true) {
+            var input = Number(prompt("Input Number:"));
+            if (input == 0){
+                console.log("입력 종료.")
+                break;
+            }else {
+                cnt ++; 
+                sum += input;
+                console.log("입력한 횟수는 "+sum+"이고, 총 합은 "+cnt+"입니다.");
+            }
+        }
+    </script>
+    
+</body>
+</html>
