@@ -1,0 +1,52 @@
+<!--사용자가 입력한 숫자가 소수인지 아닌지 알려주는 프로그램을 작성해 봅시다.-->
+<!--
+    소수란, 1과 자기 자신 만(n)으로 나누어 지는 수. 루트n까지만 나눠봐도 알수 있다.  
+    
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>소수 판결 프로그램</h1>
+    <script>
+        var isPrime = true;
+        var n = Number(prompt("2 이상의 정수를 입력해 주세요.:"));
+        for (var i=2; i<n; i++){
+            if(n%i === 0){
+                isPrime = false;
+                 break;
+            }
+            console.log(isPrime, i)
+        }
+        if (isPrime){
+            document.write(n+"은 소수입니다.");
+        } else{
+             document.write(n+"은 소수가 아닙니다. [" + i + "]");
+        }
+        //  var input = Number(prompt("2 이상의 숫자를 입력하세요.:"))   
+        //  var start = 2;
+        //  var isP = true;
+        
+        //  while (start < input){
+        //      if (input % start === 0){
+        //          console.log("소수가 아닙니다.")
+        //          isP = false;
+        //          break;
+        //      }else{
+        //          start ++;
+        //      }
+        //  }
+        //  if (isP === true){
+        //      document.write(input+"은 소수입니다.");
+        //  }else {
+        //      document.write(input+"은 소수가 아닙니다.");
+        //  }
+
+    </script>
+</body>
+</html>
