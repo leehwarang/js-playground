@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var n = Number(prompt('몇 단을 출력하실건가요?:'))
+        if (n<2 || n>9){
+            document.write('2 이상, 9이하의 값을 입력하세요.')
+        } else{
+            document.write('<h1>'+n+'단 출력하기</h1>')
+            var i = 1;
+            while(i<10){
+                document.write(n+'*'+i+'='+n*i+'<br/>')
+                i ++;
+            } 
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
