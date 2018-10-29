@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />-->
+</head>
+
+<body>
+    <script>
+        var n = Number(prompt('몇 단을 출력하실건가요?:'));
+        if (n < 2 || n > 9) {
+            console.log("2 이상, 9이하의 값을 입력하세요.")
+        }else {
+            document.write('<h1>' + n + '단 출력하기</h1>')
+            for (var i = 1; i <= 9; i++) {
+                console.log(n + "*" + i + "=" + n * i)
+            }
+        }
+    </script>
+</body>
+
+</html>
