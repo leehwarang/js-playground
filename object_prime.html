@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var numbers = {
+            "all": [],
+            "prime": [],
+            "isPrime": function (number) {
+                var condition = true;
+                for (var i = 2; i < number; i++) {
+                    if (number % i === 0) {
+                        condition = false;
+                        break;
+                    }
+                };
+                if (condition) {
+                    console.log(number + "은 소수입니다.");
+                } else {
+                    console.log(number + "은 소수가 아닙니다.");
+                }
+            },
+            "addPrime": function (number) {
+                if (numbers.prime.includes(number)) {
+                    ;
+                } else {
+                    numbers.prime.push(number);
+                }
+            },
+            "getAllPrimes": function () {
+                for (var i = 0; i < numbers.prime.length; i++) {
+                    console.log(numbers.prime[i]);
+                }
+            },
+            "addAll": function (max_num) {
+                for (var i = 1; i <= max_num; i++) {
+                    numbers.all.push(i);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
