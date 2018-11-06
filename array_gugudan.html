@@ -1,0 +1,25 @@
+!<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    <script>
+        for (var i=2; i<10; i++){
+            var results = [];
+            for (var j=1; j<10; j++){
+                results.push(i*j);
+            }
+            document.write('<h2>'+i+'단 출력</h2>')
+            for (var z=0; z<results.length; z++){
+                document.write(results[z]+'<br>')
+            }
+        }
+    </script>
+</body>
+</html>
