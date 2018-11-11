@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    <script>
+        //"8,7"를 입력했을 때 2단 부터 8단의 x7까지 출력.
+        var input_string = prompt("x,y의 형식으로 두 숫자를 입력하세요.");
+        var input_list = input_string.split(',');
+        var x = Number(input_list[0]);
+        var y = Number(input_list[1]);
+
+        for (var i=2; i<x+1; i++){
+            document.write('<h2>'+i+'단 출력</h2>');
+            if (i === x){
+                for (var j=1; j<y+1; j++){
+                    document.write(i+'*'+j+'='+i*j+'<br>');
+                }
+            }else {
+                for (var j=1; j<10; j++){
+                    document.write(i+'*'+j+'='+i*j+'<br>');
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>
