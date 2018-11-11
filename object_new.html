@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    <script>
+        //하나의 객체만 만들 때는 json 방식으로 만들면 되지만,
+        //여러개의 객체를 만들어야 할 때는 생성자 함수를 만든다.
+        var Person = function(name, occupation, age, weight){
+            this.name = name;
+            this.occupation = occupation;
+            this.age = age;
+            this.weight = weight;
+            this.nextyear = function(){
+                this.age += 1;
+            }
+            this.eat = function(food){
+                this.weight += food.energy;
+            }
+        }
+        var p1 = new Person('michelle', 'programmer', 25, 45);
+        var p2 = new Person('frank', 'designer', 35, 75);
+
+        var Food = function(food_name, energy){
+            this.food_name = food_name;
+            this.energy = energy;
+        }
+        
+        var f1 = new Food('pizza', 30);
+    </script>
+    
+</body>
+</html>
