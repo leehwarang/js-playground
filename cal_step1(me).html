@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>계산기</title>
+</head>
+<body>
+    <h2>2개의 숫자값을 입력하세요.</h2>
+    <input id ="userinput" type="text"><button onclick="showresult()">확인</button>
+    
+    <script>
+        var showresult = function(){
+            var user_input = document.getElementById("userinput");
+    
+            var first_num = Number(user_input.value[0]);
+            var second_num = Number(user_input.value[1]);
+
+            console.log(first_num, second_num);
+        
+            document.write(first_num + second_num+'<br>');
+            document.write(first_num - second_num+'<br>');
+            document.write(first_num * second_num+'<br>');
+            document.write(first_num / second_num+'<br>');
+        }
+
+        
+    </script>
+    
+</body>
+</html>
