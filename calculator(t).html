@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <h1>문자열 계산기 구현하기</h1>
+    <!-- <input type="text" id="num1"> -->
+    <!-- <input type="text" id="num2"> -->
+    <!-- <button>확인</button> -->
+
+    <div id="output"></div>
+    <script>
+        main = function(){
+            console.log("Calculator1");
+            var out = document.getElementById('output');
+            var str = "";
+            str += "<h2>계산기 구현하기</h2>";
+
+            var n1 = Number(prompt("첫 번째 값을 입력해주세요."));
+            var n2 = Number(prompt("두 번째 값을 입력해주세요."));
+
+            str += "더하기:"+ (n1+n2) +"<br>";
+            str += "빼기:"+ (n1-n2) +"<br>";
+            str += "곱하기:"+ (n1*n2) +"<br>";
+            str += "나누기:"+ (n1/n2) +"<br>";
+            
+            out.innerHTML = str;
+        }
+
+        main();
+        
+    </script>
+</body>
+</html>
