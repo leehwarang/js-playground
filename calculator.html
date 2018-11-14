@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var input = prompt("계산하고 싶은 사칙 연산 식을 입력하세요.")
+        var result = Number(input[0]);
+        var operator = "";
+        for (var i=1; i<input.length; i++){
+            if (i%2 === 0){
+                //짝수(숫자)
+                if(operator === "+"){
+                    //더하기
+                    result = result + Number(input[i]); 
+                }else if(operator === "-"){
+                    //빼기
+                    result = result - Number(input[i]); 
+                }else if(operator === "*"){
+                    //곱하기
+                    result = result * Number(input[i]);
+                }else if(operator === "/"){
+                    //나누기
+                    result = Math.round((result / Number(input[i])));
+                }
+            }else {
+                //짝수(연산자)
+                operator = input[i];
+            }
+        }
+        console.log("연산의 결과는"+result+"입니다.");
+    </script>
+    
+</body>
+</html>
