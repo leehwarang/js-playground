@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>문자열 계산기 구현하기</h1>
+    <div id ="output"></div>
+    <script>
+        function main(){
+            var n1 = Number(prompt('첫 번째 숫자를 입력하세요.'));
+
+            var result = n1;
+            var op = '';
+            var n2 = 0;
+            var n = 2;
+
+            while (true){
+                op = prompt('연산자를 입력하세요.');
+
+                if (op === 'quit'){
+                    break;
+                }
+
+                n2 = Number(prompt(n+'번 째숫자를 입력하세요.'));
+                    
+                switch(op){
+                    case '+':
+                    result += n2;
+                    break;
+
+                    case '-':
+                    result -= n2;
+                    break;
+
+                    case '*':
+                    result *= n2;
+                    break;
+
+                    case '/':
+                    result /= n2;
+                    break;
+                }
+            }
+            output.innerHTML = '결과는'+result+'입니다.';
+
+        }
+
+        main()
+    </script>
+</body>
+</html>
