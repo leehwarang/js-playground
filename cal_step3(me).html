@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var result = 0;
+        var cnt = 0;
+        var first_num = 0;
+        var op = "";
+        
+        while(true){    
+            var input = prompt("계산하고 싶은 숫자나 연산을 하나씩 입력하세요.")
+
+            if (input === "quit"){
+                break;
+            }
+            if (cnt === 0){
+                result = Number(input);
+            }
+
+            if (cnt%2 == 0){ //짝수일 때: 숫자
+               switch(op){
+                   case '+':
+                   result = result + Number(input);
+                   break;
+
+                   case '-':
+                   result = result - Number(input);
+                   break;
+
+                   case '*':
+                   result = result * Number(input);
+                   break;
+
+                   case '/':
+                   result = result / Number(input);
+                   break;
+               }
+            }else{ //홀수일 때: 연산자
+                op = input;            
+            }
+            cnt += 1;
+        }
+        document.write("<h2>연산 결과는"+result+"입니다.</h2>");
+    
+    </script>
+</body>
+</html>
