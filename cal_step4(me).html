@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <div id = 'output'>
+    </div>
+    <script>
+        var n = 2; 
+        var result;
+
+        function getFirstValue(){
+            var n1 = Number(prompt('첫 번째 값을 입력하세요.'));
+            return n1;
+        }
+
+        function getOperator(){
+            while (true){
+                var op = prompt('연산자를 입력하세요.');
+                if (op === '+' ||op === '-' ||op === '*' ||
+                    op === '/' ||op === 'quit'){
+                        break;
+                }else{
+                    alert('올바른 연산자를 입력하세요.');
+                }
+            }
+            return op;
+        }
+        
+        function getSecondValue(){
+            var n2 = Number(prompt(n+'번째 값을 입력하세요.'));
+            n += 1;
+            return n2;
+        }
+
+        function calculate(result, op, n2){
+            switch(op){
+                    case '+':
+                    result += n2;
+                    break;
+
+                    case '-':
+                    result -= n2;
+                    break;
+
+                    case '*':
+                    result *= n2;
+                    break;
+
+                    case '/':
+                    result /= n2;
+                    break;
+                    default:
+                    return output.innerHTML = '올바른 연산자를 입력하지 않았습니다.';
+            }
+            return result;
+        }
+
+        function print(result){
+            var output = document.getElementById('output');
+            output.innerHTML = '<h2>연산 결과는'+result+'입니다.</h2>';
+        }
+
+        function main(){
+            var result = getFirstValue();
+            while (true){
+                var op = getOperator();
+                if (op === 'quit'){
+                    break;
+                }
+                var n2 = getSecondValue();
+                result = calculate(result, op, n2);
+            }
+            print(result);
+        }
+        main();
+    
+    
+    </script>
+    
+</body>
+</html>
