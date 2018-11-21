@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <div id='output'></div>
+    <script>
+        var input = {
+            cnt : 2 //객체의 멤버 변수
+        };
+
+        input.getFirstValue = function(){
+            var n1 = Number(prompt('첫 번째 숫자를 입력하세요.'));
+            return n1;
+        };
+        input.getSecondValue = function(){
+            var num2 = Number(prompt(this.cnt+'번째 숫자를 입력하세요.'));
+            this.cnt ++;
+            return num2;
+        };
+        input.getOperator = function(){
+            while (true){
+                var op = prompt('연산자를 입력하세요.');
+                if (op === '+' || op === '-' || op === '*'
+                    || op === '/' || op === 'quit'){
+                        break;
+                }else{
+                    alert('올바른 사칙 연산자(+,-,*,/)를 입력하세요.');
+                }
+            }
+            return op;
+        };
+
+        var calculator = {};
+        calculator.calculate = function(first, second, op){
+            var ret = first; //메서드 안에서 사용되는 변수(객체의 멤버 변수 x)
+            switch(op){
+                case '+':
+                ret += second;
+                break;
+
+                case '-':
+                ret -= second;
+                break;
+
+                case '*':
+                ret *= second;
+                break;
+
+                case '/':
+                ret /= second;
+                break;
+            }
+            return ret;
+        };
+
+        var output = {};
+        output.out = document.getElementById('output');
+
+        output.print = function(value){
+            this.out.innerHTML = '최종 결과값은' +value+'입니다.';
+        };
+
+        function main(){
+            var result = input.getFirstValue();
+            while (true){
+                var op = input.getOperator();
+                if (op === 'quit'){
+                    break;
+                }
+                var num = input.getSecondValue();
+                result = calculator.calculate(result, num, op)
+            }
+            output.print(result);
+        }
+
+        main();
+    </script>
+</body>
+</html>
