@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    사칙 연산을 수행할 계산식: <input type="text" id ="user_input"><button onclick="main()">확인</button>
+    <div id="print"></div>
+    <script>
+
+        function main(){
+            var str = document.getElementById('user_input').value;
+            var str_list = str.split(" ");
+            console.log (str_list);
+            var result = Number(str_list[0]);
+            var op = '';
+            var num2; 
+
+            
+            for (var i=1; i<str_list.length; i++){
+                if (i%2 === 0){ //짝수: 숫자
+                    num2 = Number(str_list[i]);
+
+                    switch(op){
+                    case "+":
+                        result += num2;
+                        break;
+                    case "-":
+                        result -= num2;
+                        break;
+                    case "*":
+                        result *= num2;
+                        break;
+                    case "/":
+                        result /= num2;
+                        break;
+                    }
+                }else{ //홀수: 연산자
+                    op = str_list[i];
+                }
+            }
+            var show = document.getElementById('print');
+            show.innerHTML = '<h2>사칙 연산의 결과는 '+result+'입니다.</h2>';
+        }
+
+        
+    
+    </script>
+</body>
+</html>
