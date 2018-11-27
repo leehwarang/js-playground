@@ -1,12 +1,53 @@
+var input = {'array': []};
+
+input.getInput = function(){
+    return this.array.join(""); //배열의 원소를 연결하여 하나의 값으로 만듦.(dafault값은 ,)
+}
+
+var output = {};
+
+output.text = document.getElementById('output'); //div 태그 자체가 output.text임.
+                                                //이 문장을 써주지 않으면 output.text가 div태그를 의미하지 않음.
+
+
+
 var clickNumbers = function(event){ //객체를 눌렀을 때 객체 자체가 event로 넘어옴
     console.log("num click");
-    console.log(event.target.innerHTML);
+    var str = event.target.innerHTML;
+    console.log(str);
+
+    switch(str){
+        case "BS":
+        input.array.pop();
+        break;
+        case "+":
+        input.array.push(' + ');
+        break;
+        case "-":
+        input.array.push(' - ');
+        break;
+        case "*":
+        input.array.push(' * ');
+        break;
+        case "/":
+        input.array.push(' / ');
+        break;
+        default:
+        input.array.push(str);
+    }
+
+    if (input.array.length === 0){
+        output.text.innerHTML = 'Empty';
+    }else{
+        output.text.innerHTML = input.getInput(); //output.text의 innerHTML을 설정하는 것, 
+    }
 };
 
-var clickOthers = function(event){
+var showResult = function(event){
     console.log("num others");
     console.log(event.target.innerHTML);
 }
+
 
 // var input = {};
 
