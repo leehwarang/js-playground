@@ -16,17 +16,11 @@ var clickNumbers = function(event){ //객체를 눌렀을 때 객체 자체가 e
     var str = event.target.innerHTML;
     console.log(str);
 
-    switch(str){
-        case "BS":
+    if (str === 'BS'){
         input.array.pop();
-        break;
-        case "+":
-        case "-":
-        case "*":
-        case "/":
+    }else if (str === '+' || str === '-' || str === '*' || str === '/'){
         input.array.push(' '+str+' ');
-        break;
-        default:
+    }else{
         input.array.push(str);
     }
 
