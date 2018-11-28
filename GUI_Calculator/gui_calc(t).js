@@ -21,16 +21,10 @@ var clickNumbers = function(event){ //객체를 눌렀을 때 객체 자체가 e
         input.array.pop();
         break;
         case "+":
-        input.array.push(' + ');
-        break;
         case "-":
-        input.array.push(' - ');
-        break;
         case "*":
-        input.array.push(' * ');
-        break;
         case "/":
-        input.array.push(' / ');
+        input.array.push(' '+str+' ');
         break;
         default:
         input.array.push(str);
