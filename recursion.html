@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 일반 함수로 구현
+        // var countdown = function(v){
+        //     for (let i = 0; i<v; i++){
+        //         console.log(v-i);
+        //     }
+        //     console.log("Fire!");
+        // };
+        // countdown(10);
+
+        var countdown2 = function(v2){
+            console.log(v2);
+            if (v2 === 1){
+                console.log("땡!");
+                return ;
+            }
+            countdown2(v2-1);
+        }
+        countdown2(10);
+    </script>
+    
+</body>
+</html>

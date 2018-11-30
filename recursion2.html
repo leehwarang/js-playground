@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    <script>
+        //일반 - a부터 b까지 정수를 더해서 리턴해 주는 함수
+        // var add = function(a, b){
+        //     var result = a;
+        //     for (var i = (result+1); i<=b; i++){
+        //         result += i;
+        //     }
+        //     console.log(result);
+        // };
+        // add(1, 10);
+
+        //재귀 - a부터 b까지 정소를 더해서 리턴해주는 함수
+        var rsum = function(a, b){
+            if (a === b){
+                return a; 
+            }
+            return b + rsum(a, b-1); 
+        }
+    
+    </script>
+</body>
+</html>
