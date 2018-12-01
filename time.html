@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //첫 번째 방법 
+        var fibo = function (n) {
+            if (n === 0) {
+                return 0;
+            } else if (n === 1) {
+                return 1;
+            }
+            return fibo(n - 1) + fibo(n - 2);
+        };
+        
+        //두 번째 방법: 성능 개선(다이나믹 프로그래밍 방법)
+        var arr = [0, 1];
+        var fibo_d = function (n) {
+            if (arr[n] == undefined) {
+                arr[n] = fibo_d(n - 1) + fibo_d(n - 2);
+            }
+            return arr[n];
+        };
+        
+        var t1 = Date.now()
+        var x = fibo(40);
+        var t2 = Date.now()
+        console.log('재귀함수로 fibo(40) 계산하는데 걸린 시간:', (t2-t1),'ms');
+
+        var t1 = Date.now()
+        var y = fibo_d(40);
+        var t2 = Date.now()
+        console.log('다이나믹 프로그래밍으로 fibo(40) 계산하는데 걸린 시간:', (t2-t1),'ms');
+
+        console.log(x === y);
+
+    </script>
+</body>
+</html>
