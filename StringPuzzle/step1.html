@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>StringPuzzle</title>
+    <style>
+        #btn-group {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <p id="word1">HELLO</p>
+    <div id='btn-group'>
+    </div>
+    <div id="btn-group2">
+        <button onclick="swap(event)">뒤집기</button>
+        <button onclick="shift(event)">밀어내기</button>
+    </div>
+    <p>일치합니다.</p>
+    <script>
+        var str = document.getElementById('word1').innerHTML;
+        var btn_group = document.getElementById('btn-group');
+        
+        for (var i = 0; i < str.length; i++){
+            var btn = document.createElement('button');
+            btn.innerHTML = str[i];
+            btn_group.appendChild(btn);
+        }
+
+        var swap = function(event){
+            console.log('swap');
+        };
+
+        var shift = function(event){
+            console.log('shift');
+        }
+    </script>
+</body>
+</html>
