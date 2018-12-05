@@ -31,7 +31,15 @@
         }
 
         var swap = function(event){
-            console.log('swap');
+            var str = document.getElementById('word1').innerHTML;
+            var str_list = str.split("");
+            // console.log(str_list);
+            var empty_list = str_list.reverse();
+            // console.log(empty_list);
+            var swap_str = empty_list.join("");
+            // console.log(swap_str);
+            renewBtn(swap_str);
+            
         };
 
         var shiftLeft = function(event){
@@ -43,12 +51,12 @@
             //0에 1을, 1에 2를, 2에 3을, 4에 5을, 
             for (var i = 0; i<str_list.length-1; i++){
                 str_list[i] = str_list[i+1];
-                console.log(str_list);
             } 
             str_list.pop();
-            console.log(str_list);
-            console.log(str_list.join(""));
-
+            // console.log(str_list);
+            var left_str = str_list.join("");
+            // console.log(left_str);
+            renewBtn(left_str);
         }
         
         var shiftRight = function(event){
@@ -63,15 +71,18 @@
                     str_list[i] = str_list[i-1];
                 };
             }
-            console.log(str_list);
-            console.log(str);
-            console.log(str_list.join(""));
-            renewBtn();
+            // console.log(str_list);
+            var right_str = str_list.join("");
+            // console.log(right_str);
+            renewBtn(right_str);
         } 
-        var renewBtn = function(){
-            var btn_group = document.getElementById('btn-group').childNodes;
-            console.log(btn_group);
-        }
+        var renewBtn = function(str){
+            console.log(str);
+            console.log(btn_group.children);
+            for (var i = 0; i<btn_group.length; i++){
+                console.log(btn_group.children[i].innerHTML);
+            }
+        };
         
     </script>
 </body>
