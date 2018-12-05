@@ -17,13 +17,13 @@
     </div>
     <div id="btn-group2">
         <button onclick="swap(event)">뒤집기</button>
-        <button onclick="shift(event)">밀어내기</button>
+        <button onclick="shiftLeft(event)">왼쪽으로 밀어내기</button>
+        <button onclick="shiftRight(event)">오른쪽으로 밀어내기</button>
     </div>
     <p>일치합니다.</p>
     <script>
         var str = document.getElementById('word1').innerHTML;
         var btn_group = document.getElementById('btn-group');
-        
         for (var i = 0; i < str.length; i++){
             var btn = document.createElement('button');
             btn.innerHTML = str[i];
@@ -34,9 +34,45 @@
             console.log('swap');
         };
 
-        var shift = function(event){
-            console.log('shift');
+        var shiftLeft = function(event){
+            var str = document.getElementById('word1').innerHTML;
+            var str_list = str.split("");  
+            str_list[str_list.length] = '';
+            str_list[str_list.length-1] = str_list[0];         
+
+            //0에 1을, 1에 2를, 2에 3을, 4에 5을, 
+            for (var i = 0; i<str_list.length-1; i++){
+                str_list[i] = str_list[i+1];
+                console.log(str_list);
+            } 
+            str_list.pop();
+            console.log(str_list);
+            console.log(str_list.join(""));
+
         }
+        
+        var shiftRight = function(event){
+            var str = document.getElementById('word1').innerHTML;
+            var str_list = str.split("");
+            str_list[5] = str_list[4]
+            for (var i = str_list.length; i>=0; i--){
+                if (i === 0){
+                    str_list[i] = str_list.pop();
+                    str_list.splice(str_list.length-1,1);
+                }else{
+                    str_list[i] = str_list[i-1];
+                };
+            }
+            console.log(str_list);
+            console.log(str);
+            console.log(str_list.join(""));
+            renewBtn();
+        } 
+        var renewBtn = function(){
+            var btn_group = document.getElementById('btn-group').childNodes;
+            console.log(btn_group);
+        }
+        
     </script>
 </body>
 </html>
