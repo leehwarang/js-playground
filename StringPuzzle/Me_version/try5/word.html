@@ -9,10 +9,19 @@
         #btns-group {
             margin: 10px;
         }
+
+        #board {
+            text-align: right;
+        }
+    
     </style>
 </head>
 <body>
     <h2>문자열 퍼즐 만들기</h2>
+    <div id = 'board'>
+        <p id="score-board">SCORE: </p>
+        <button id='new-quiz' onclick="new_quiz(event)">New</button>
+    </div>
     <p id= 'base-str'></p>
     <div id = 'quiz-btn'></div>
     <div id = ''>

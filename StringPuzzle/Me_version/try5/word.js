@@ -1,7 +1,7 @@
 var random_list = 'apple,michelle,frank,programmer,helloworld,ruru,newyork,youonlyliveonce,sanfransico,november'.split(',');
 var show_result = document.getElementById('result');
 var quiz_btn = document.getElementById('quiz-btn');
-
+var scoreboard = document.getElementById('score-board');
 
 game = {};
 game.word = '';
@@ -16,6 +16,9 @@ game.choice_word = function(){
 };
 
 game.btn_init = function(){
+    while (quiz_btn.hasChildNodes()){
+        quiz_btn.removeChild(quiz_btn.firstChild);
+    }
     for (var i = 0; i < this.word.length; i++){
         var btn = document.createElement('button');
         btn.innerHTML = this.word[i];
@@ -34,6 +37,13 @@ game.check = function(){
     if (this.word === this.word_list.join('')){
         this.score += 1;
         show_result.innerHTML = '일치합니다.';
+        scoreboard.innerHTML += 'O';
+        if (this.score >=3){
+            scoreboard.innerHTML = '';
+            scoreboard.innerHTML = 'Thank you for playing!';
+        }else{
+            new_quiz();
+        }
     }else{
         show_result.innerHTML = '일치하지 않습니다.';
     }
@@ -68,13 +78,26 @@ var shuffle = function(){
     }
 };
 
+var new_quiz = function(event){
+    game.word = '';
+    game.word_list = [];
+    game.btn_list = [];
+    game.choice_word();
+    game.btn_init();
+    if (game.toggle){
+        swap();
+    }
+    shuffle();
+    game.check();
+};
+
 game.choice_word();
 game.btn_init();
 if (game.toggle){
     swap();
 }
 shuffle();
-game.check();
+game.check(); //우연히 문제가 바로 맞았을 때, 버튼의 문자열을 확인하지 못하고 바로 O가 생긴 후 새로운 문제가 넘어감. -> UI 오류.
 
 
 
