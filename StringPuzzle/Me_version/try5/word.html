@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>문자열 퍼즐 만들기</title>
+    <style>
+        #btns-group {
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>문자열 퍼즐 만들기</h2>
+    <p id= 'base-str'></p>
+    <div id = 'quiz-btn'></div>
+    <div id = ''>
+        <button id='left-shift' onclick="shiftLeft(event)">왼쪽으로 밀기</button>
+        <button id='right-shift' onclick="shiftRight(event)">오른쪽으로 밀기</button>
+        <button id='swap' onclick="swap(event)">뒤집기</button>
+    </div>
+    <p id= 'result'></p>
+    <script src="word.js"></script>
+</body>
+</html>
