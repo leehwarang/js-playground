@@ -1,11 +1,21 @@
+//새로고침 눌렀을 때 맞는지 검사하는게 아니라, 뒤집기/오,왼shift 키를 눌렀을 때만 맞는지 검사해야함..
+//test code의 필요성?
+
+
 //html elements
 var word1 = document.getElementById('word1'); //answer
 var word2 = document.getElementById('word2'); //buttons
 var check = document.getElementById('check'); //word1 === word2?
+var progress = document.getElementById('progress'); //progress check
 
 
 //game objects
-var game = {'btns':[]};
+var game = {
+    'btns': [],
+    'maxPlay': 3,
+    'current': 0
+};
+
 game.words = 'apple,linux,javascript,tutorials,codesquad,baby,girifriend,legend'.split(',');
 
 //choose 1 word from words
@@ -25,20 +35,29 @@ game.addButtons = function(){
     }
 };
 
-game.init = function(){
-    this.choose();
-    this.addButtons();
-    this.updateDisplay();
-};
+game.removeButtons = function(){
+    for(var i = 0; i<this.btns.length; i++){
+        word2.removeChild(this.btns[i]);
+    }
+    this.btns = [];
+}
 
+game.checkCorrect = function(){
+    return this.answer === this.letters.join('');
+}
 
 game.updateDisplay = function(){
-    var gameStr = this.letters.join('');
-    if (this.answer === gameStr){
+    if (this.checkCorrect()){
         check.innerHTML = '일치합니다.';
     }else {
         check.innerHTML = '일치하지 않습니다.';
     }
+};
+
+game.init = function(){
+    this.choose();
+    this.addButtons();
+    this.updateDisplay();
 };
 
 game.copyBtnText = function(){
@@ -47,40 +66,68 @@ game.copyBtnText = function(){
     }
 };
 
-//event handler for swap button
-var swap = function () {
+game.swap = function(){
     var temp = [];
     //copy and swap
-    while (game.letters.length != 0){
-        var s = game.letters.pop();
+    while (this.letters.length != 0){
+        var s = this.letters.pop();
         temp.push(s);
     }
 
-    game.letters = temp;
-    game.copyBtnText();
-    game.updateDisplay();
+    this.letters = temp;
+    this.copyBtnText();
+    this.updateDisplay();
+};
 
-    //원래 코드
-    // game.word = game.word.reverse();
-    // game.copy();
-    // game.check();
+game.rshift = function(){
+    var s = this.letters.pop();
+    this.letters.unshift(s);
+
+    this.copyBtnText();
+    this.updateDisplay();
+};
+
+game.lshift = function(){
+    var s = this.letters.shift();
+    this.letters.push(s);
+
+    this.copyBtnText();
+    this.updateDisplay();
+};
+
+
+
+game.progress = function(){
+    if (this.checkCorrect()){
+        this.current ++;
+        this.removeButtons();
+        this.init();
+        this.shuffle();
+        var str = "";
+        for (var i = 0; i <this.current; i++){
+            str += "O"
+        }
+        progress.innerHTML = str;
+    }
+    if (this.current == this.maxPlay){
+        alert('Good! Thank you for playing.');
+    }
+};
+
+//event handler for swap button
+var swap = function () {
+    game.swap();
+    game.progress();
 };
 
 var rshift = function () {
-    var s = game.letters.pop();
-    game.letters.unshift(s);
-
-    game.copyBtnText();
-    game.updateDisplay();
+    game.rshift();
+    game.progress();
 };
 
 var lshift = function () {
-    console.log('lshift');
-    var s = game.word.shift();
-    game.word.push(s);
-
-    game.copyBtnText();
-    game.updateDisplay();
+    game.lshift();
+    game.progress();
 };
 
 //shuffle
@@ -88,13 +135,13 @@ game.shuffle = function(){
     var toggle = Math.floor(Math.random()*2) === 0;
 
     if (toggle){
-        swap();
+        game.swap();
     }
     
-    var n = Math.floor(Math.random() * game.answer.length);
+    var n = Math.floor(Math.random() * (game.answer.length-1));
     
     for (var i=0; i<n; i++){
-        rshift();
+        game.rshift();
     }
 };
 
