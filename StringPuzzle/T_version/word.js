@@ -7,6 +7,7 @@ var word1 = document.getElementById('word1'); //answer
 var word2 = document.getElementById('word2'); //buttons
 var check = document.getElementById('check'); //word1 === word2?
 var progress = document.getElementById('progress'); //progress check
+var time = document.getElementById('time');
 
 
 //game objects
@@ -15,6 +16,8 @@ var game = {
     'maxPlay': 3,
     'current': 0
 };
+
+
 
 game.words = 'apple,linux,javascript,tutorials,codesquad,baby,girifriend,legend'.split(',');
 
@@ -110,7 +113,10 @@ game.progress = function(){
         progress.innerHTML = str;
     }
     if (this.current == this.maxPlay){
-        alert('Good! Thank you for playing.');
+        var sec = (Date.now() - game.startTime)/1000;
+        clearInterval(x);
+        // alert('Good! Your Record: '+ms+ ' sec');
+        alert('Good! Your Record: '+sec+ ' sec');
     }
 };
 
@@ -145,7 +151,14 @@ game.shuffle = function(){
     }
 };
 
+var updateTime = function(){
+    var now = Date.now() - game.startTime;
+    time.innerHTML = now/1000 + "s";
+}
+
 //코드의 실행부
+game.startTime = Date.now();
 game.init(); //이전에는 html에서 지정된 문자열을 가져와 answer로 지정했음
 game.shuffle();
 game.updateDisplay();
+var x = setInterval(updateTime, 50);
