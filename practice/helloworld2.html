@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1 id='heading'></h1>
+    <button id='my-btn'>click me!</button>
+
+    <script>
+        var heading = document.getElementById('heading');
+        var myButton = document.getElementById('my-btn');
+
+        myButton.addEventListener('click', function(){
+            heading.innerHTML = 'Hello World!';
+        });
+    </script>
+    
+</body>
+</html>

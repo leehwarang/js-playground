@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <label for="username">Username</label>
+    <input type="text" id='username'>
+
+    <script>
+        var el = document.getElementById('username');
+        var MIN_USER_NAME_LENFRH = 2;
+        var checkUserNameLength = function(n){
+            if (el.value.length < n){
+                alert('이름은'+n+'자 이상이어야 합니다.');
+            }else{
+                alert('good!')
+            }
+        };
+
+        el.addEventListener('blur', function(){
+            checkUserNameLength(MIN_USER_NAME_LENFRH);
+        });
+    </script>
+</body>
+</html>

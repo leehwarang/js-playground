@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <label for="username">User name </label>
+  <input type="text" id="username">
+  <em id="message"></em>
+  <script>
+    var elem = document.getElementById('username');
+    var msg  = document.getElementById('message');
+
+    elem.addEventListener('blur', function () {
+      if (elem.value.length < 2) {
+        msg.innerHTML = '이름은 2자 이상 입력해 주세요';
+      } else {
+        msg.innerHTML = '';
+      }
+    });
+  </script>
+</body>
+</html>

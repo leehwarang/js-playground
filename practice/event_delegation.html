@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id='parent-list'>
+        <li id='post-1'>Item 1</li>
+        <li id='post-2'>Item 2</li>
+        <li id='post-3'>Item 3</li>
+        <li id='post-4'>Item 4</li>
+        <li id='post-5'>Item 5</li>
+        <li id='post-6'>Item 6</li>
+    </ul>
+    <div id='msg'></div>
+    <script>
+        var msg = document.getElementById('msg');
+
+        document.getElementById('parent-list').addEventListener('click', function(e){
+            console.log('[target]: '+ e.target);
+            console.log('[target.nodeName]: '+ e.target.nodeName);
+
+            // li 요소 이외의 요소에서 발생한 이벤트는 대응하지 않는다. 
+            if (e.target && e.target.nodeName == 'LI'){
+                msg.innerHTML = 'li#' + e.target.id + ' was clicked!';
+            }
+        });
+    
+    </script>
+</body>
+</html>

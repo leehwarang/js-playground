@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+     html { border: 1px solid red; padding: 30px; text-align: center;}
+     body { border: 1px solid green; padding: 30px;}
+
+     .top {
+         width: 300px;
+         height: 300px;
+         background-color: red;
+         margin: auto;
+     }
+     .middle {
+         width: 200px;
+         height: 200px;
+         background-color: blue;
+         position: relative; 
+         top: 34px;
+         left: 50px; 
+     }
+     .bottom {
+         width: 100px; 
+         height: 100px;
+         background-color: yellow;
+         position: relative; 
+         top: 34px; 
+         left: 50px;
+         line-height: 100px;
+     }
+    </style>
+</head>
+<body>
+    <div class="top">top
+        <div class="middle">middle
+            <div class="bottom">bottom</div>
+        </div>
+    </div>
+    <script>
+    //true: capturing / false: bubbling
+    var useCature = true;
+
+    var handler = function(event){
+        var phases = ['capturing', 'target', 'bubbling'];
+        var node = this.nodeName + (this.className ? '.' + this.className : '');
+        console.log(node, phases[event.eventPhase - 1]);
+        alert(node + ':' + phases[event.eventPhase - 1]);
+    }
+
+    document.querySelector('html').addEventListener('click', handler, useCature);
+    document.querySelector('body').addEventListener('click', handler, useCature);
+
+    document.querySelector('div.top').addEventListener('click', handler, useCature);
+    document.querySelector('div.middle').addEventListener('click', handler, useCature);
+    document.querySelector('div.bottom').addEventListener('click', handler, useCature);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <a href="poiemaweb.com">Go to poiemaweb.com</a>
+  <script>
+  var elem = document.querySelector('a');
+
+  elem.addEventListener('click', function (e) {
+    console.log(e.cancelable);
+
+    // 기본 동작을 중단시킨다.
+    e.preventDefault();
+  });
+  </script>
+</body>
+</html>
