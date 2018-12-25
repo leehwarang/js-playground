@@ -87,11 +87,9 @@ var clickNumbers = function(event){
         input.array.push(str);
     }
     if (input.isEmpty()){
-        //입력이 비어 있는 상태
-        output.text.innerHTML = '0';
+        output.text.innerHTML = '0'; //입력이 비어 있는 상태
     }else{
-        //입력이 있는 상태
-        output.display();
+        output.display(); //입력이 있는 상태
     }    
 };
 
