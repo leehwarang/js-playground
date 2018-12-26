@@ -9,7 +9,7 @@
 <body>
     <div>
         <p>0</p>
-        <table id='btns-group'>
+        <table>
             <tr>
                 <td><button class='btns-num'>7</button></td>
                 <td><button class='btns-num'>8</button></td>
@@ -37,14 +37,20 @@
         </table>
     </div>
     <script>
-        var btns_group = document.getElementById('btns-group').addEventListener('click', function(e){
-            console.log('[taget]: '+ e.target);
-            console.log('[target.nodeName]: ' + e.target.nodeName);
+        //이벤트 핸들러 방식으로 구현
+        document.addEventListener('DOMContentLoaded', function(){
+             var btns = document.getElementsByClassName('btns-num');
+             
+             console.log(btns);
 
-            if (e.target && e.target.nodeName == 'BUTTON'){
-                console.log(e.target.innerHTML + 'was clicked!');    
-            }
+             for (var btn of btns){
+                 console.log(btn.innerHTML);
+                 btn.addEventListener('click', function(event){
+                     console.log(event.target.innerHTML+' success!');
+                 })
+             }
         })
+        
     </script>
 </body>
 </html>

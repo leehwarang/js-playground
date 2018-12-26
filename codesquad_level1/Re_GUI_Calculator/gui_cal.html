@@ -9,48 +9,35 @@
 <body>
     <div>
         <p>0</p>
-        <table>
+        <table id='btns-group'>
             <tr>
                 <td><button class='btns-num'>7</button></td>
                 <td><button class='btns-num'>8</button></td>
                 <td><button class='btns-num'>9</button></td>
-                <td><button>+</button></td>
+                <td><button class='btns-operator'>+</button></td>
             </tr>
             <tr>
                 <td><button class='btns-num'>4</button></td>
                 <td><button class='btns-num'>5</button></td>
                 <td><button class='btns-num'>6</button></td>
-                <td><button>-</button></td>
+                <td><button class='btns-operator'>-</button></td>
             </tr>
             <tr>
                 <td><button class='btns-num'>1</button></td>
                 <td><button class='btns-num'>2</button></td>
                 <td><button class='btns-num'>3</button></td>
-                <td><button>*</button></td>
+                <td><button class='btns-operator'>*</button></td>
             </tr>
             <tr>
-                <td><button>BS</button></td>
+                <td><button class='btns-operator'>BS</button></td>
                 <td><button class='btns-num'>0</button></td>
-                <td><button>=</button></td>
-                <td><button>/</button></td>
+                <td><button class='btns-cal'>=</button></td>
+                <td><button class='btns-operator'>/</button></td>
             </tr>
         </table>
     </div>
-    <script>
-
-        document.addEventListener('DOMContentLoaded', function(){
-             var btns = document.getElementsByClassName('btns-num');
-             
-             console.log(btns);
-
-             for (var btn of btns){
-                 console.log(btn.innerHTML);
-                 btn.addEventListener('click', function(event){
-                     console.log(event.target.innerHTML+' success!');
-                 })
-             }
-        })
-        
-    </script>
+    <script src='/Users/hwrng2/Documents/playspace/js-playground/codesquad_level1/Re_GUI_Calculator/gui_cal.js'></script>
 </body>
 </html>
+
+
