@@ -4,6 +4,7 @@ input.btn_list = [];
 input.btn_str = '';
 
 
+
 input.init = function(){
     input.btn_list = [];
 }
@@ -13,8 +14,36 @@ input.displayUpdate = function(){
     display.innerHTML = this.btn_str;
 };
 
+input.startCal = function(num1, op, num2){
+    num1 = Number(num1)
+    num2 = Number(num2)
+    switch(op){
+        case '+':
+        return num1 + num2
+        case '-':
+        return num1 - num2
+        case '*':
+        return num1 * num2
+        case '/':
+        return num1 / num2
+    }
+    return result
+}
+
 input.calculate = function(){
-    console.log("start calculate!");
+    this.btn_list = this.btn_str.split(" ")
+
+    var first_num = this.btn_list.shift()
+    var second_num;
+    var op;
+    var result = first_num;
+    while (this.btn_list.length != 0){
+        op = this.btn_list.shift()
+        second_num = this.btn_list.shift()
+        result = this.startCal(result, op, second_num);
+    }
+    display.innerHTML = result;
+    this.btn_list.push(result);
 }
 
 input.add_btn = function (e){
