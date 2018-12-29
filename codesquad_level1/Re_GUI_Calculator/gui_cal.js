@@ -13,6 +13,10 @@ input.displayUpdate = function(){
     display.innerHTML = this.btn_str;
 };
 
+input.calculate = function(){
+    console.log("start calculate!");
+}
+
 input.add_btn = function (e){
    if (e.target.className == 'btns-num'){
        this.btn_list.push(e.target.innerHTML);
@@ -20,6 +24,11 @@ input.add_btn = function (e){
    }else if(e.target.className == 'btns-operator'){
        this.btn_list.push(' '+e.target.innerHTML+' ');
        this.displayUpdate();
+   }else if(e.target.className == 'btns-bs'){
+       this.btn_list.pop();
+       this.displayUpdate();
+   }else{
+       this.calculate();
    }
 }
 
