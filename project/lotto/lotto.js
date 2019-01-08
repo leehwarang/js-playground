@@ -2,10 +2,13 @@
 //초기화 코드 추가 필요.
 
 var btns = document.getElementsByClassName('btn-num');
+
+//사용자에 관련된 객체
 var user = {
     choice_num : []
 };
 
+//로또 생성기에 관련된 객체
 var lotto = {
     random_btn : [],
     random_num : [],
@@ -47,22 +50,41 @@ var lotto = {
             alert("꽝!");
         }
     },
+    shuffle : function(arr){
+        for(var i=arr.length; i>0; i--){
+            var pick = Math.floor(Math.random() * i);
+
+            var temp = arr[i-1];
+            arr[i-1] = arr[pick];
+            arr[pick] = temp;
+        }
+        return arr;
+        
+   
+    },
     random_choice : function(){
-        for (var i = 0; i <7; i++){
-            var n = Math.floor(Math.random() * btns.length + 1);
-            this.random_btn.push(btns[n]); //뽑았는데 중복되는 경우 없애는 코드 추가 필요. 
-            
+        
+        var dummy = [];
+        for (var i=1; i<46; i++){
+            dummy.push(i);
+        }
+        
+        this.shuffle(dummy);
+
+        for (var i=0; i<7; i++){
+            this.random_num.push(dummy[i]);
+            //console.log(this.random_num);
+            //console.log(btns[dummy[i] - 1]);
+            this.random_btn.push(btns[dummy[i] - 1]);
+            //console.log(this.random_btn);
+
             if (i == 6){
                 this.random_btn[i].style.borderColor = '#FFD740';
             }else{
                 this.random_btn[i].style.borderColor = 'red';
             }
         }
-
-        for (var el of this.random_btn){
-            // console.log(el);
-            this.random_num.push(el.innerHTML);
-        }
+      
         console.log("로또에서 추첨한 숫자:" + this.random_num);
         
         var correct_cnt = this.startCompare();
