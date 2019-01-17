@@ -25,6 +25,7 @@ function onClickHandler(e){
 input.addEventListener("keyup", function(event){
     if (event.keyCode === 13){
         if (input.value !== ''){
+            var br = document.createElement('br'); //br도 하나의 태그. 
             var chk = document.createElement('input');   
             chk.setAttribute('type', 'checkbox');
             chk.setAttribute('id', 'thing'+i);
@@ -38,6 +39,7 @@ input.addEventListener("keyup", function(event){
 
             todo_list.appendChild(chk);
             todo_list.appendChild(lbl);
+            todo_list.appendChild(br);
 
             input.value = '';
             i += 1
