@@ -20,26 +20,65 @@ function onClickHandler(e){
         }
     }
 }
-
-
+ 
 input.addEventListener("keyup", function(event){
     if (event.keyCode === 13){
         if (input.value !== ''){
+            var div = document.createElement('div');
+            div.setAttribute('class', 'div'+i);
             var br = document.createElement('br'); //br도 하나의 태그. 
-            var chk = document.createElement('input');   
+            var chk = document.createElement('input');
             chk.setAttribute('type', 'checkbox');
             chk.setAttribute('id', 'thing'+i);
             chk.setAttribute('name', 'todothing');
+            chk.setAttribute('class', 'div'+i);
             chk.setAttribute('onclick', 'onClickHandler(event)');
 
             var lbl = document.createElement('label')
             lbl.setAttribute('for', 'thing'+i)
+            lbl.setAttribute('class', 'div'+i);
 
             lbl.appendChild(document.createTextNode(input.value));
 
-            todo_list.appendChild(chk);
-            todo_list.appendChild(lbl);
-            todo_list.appendChild(br);
+            var btn1 = document.createElement('button');
+            btn1.setAttribute('class', 'div'+i);
+            // btn1.setAttribute('class', 'edit');
+            btn1.innerHTML = '수정';
+            btn1.addEventListener('click', function(e){
+                var edit_str = prompt('수정된 할 일을 적어주세요.');
+                console.log(edit_str);
+                
+                var els = document.getElementsByClassName(e.target.className);
+                for (var el of els){
+                    if (el.tagName === 'LABEL'){
+                        el.innerHTML = edit_str;
+                        // console.log(edit_lbl.innerHTML);
+
+                    }
+                }
+
+    
+            })
+
+            var btn2 = document.createElement('button');
+            btn2.setAttribute('class', 'div'+i);
+            // btn2.setAttribute('class', 'delete');
+            btn2.innerHTML = '삭제';
+            btn2.addEventListener('click', function(e){
+                alert('정말 삭제하시겠습니까?');
+                var els = document.getElementsByClassName(e.target.className);
+                for (var el of els){
+                    todo_list.removeChild(el);
+                }
+            })
+
+            todo_list.append(div);
+            div.appendChild(chk);
+            div.appendChild(lbl);
+            div.appendChild(btn1);
+            div.appendChild(btn2);
+            div.appendChild(br);
+            
 
             input.value = '';
             i += 1
