@@ -2,6 +2,12 @@ var input = document.getElementById('todo-input');
 
 var todo_list = document.getElementById('todo-list');
 
+document.addEventListener('DOMContentLoaded', function(){
+    console.log("test");
+    // var i = 1; -> 왜 오류나는지 생각해보기
+    input.focus();
+});
+
 var i = 1;
 
 function onClickHandler(e){
@@ -19,6 +25,14 @@ function onClickHandler(e){
             }
         }
     }
+}
+
+function mouseOver (e){
+    console.log("mouseOver")
+}
+
+function mouseOut(e){
+    console.log("mouseOut")
 }
  
 input.addEventListener("keyup", function(event){
@@ -56,8 +70,6 @@ input.addEventListener("keyup", function(event){
 
                     }
                 }
-
-    
             })
 
             var btn2 = document.createElement('button');
@@ -78,19 +90,18 @@ input.addEventListener("keyup", function(event){
             div.appendChild(btn1);
             div.appendChild(btn2);
             div.appendChild(br);
-            
 
             input.value = '';
             i += 1
+
+            div.setAttribute('onmouseover', mouseOver());
+            div.setAttribute('onmouseout', mouseOut());
         }
     }
         
 });
 
 
-// document.addEventListener('DOMContentLoaded', function(){
-//     console.log("test");
-// });
 
 //엔터를 치면 해야할 일
 //1. 입력 받은 것을 list의 항목으로 보내야함
