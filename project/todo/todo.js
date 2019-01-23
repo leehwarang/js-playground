@@ -27,12 +27,37 @@ function onClickHandler(e){
     }
 }
 
+function editTodo (e){ 
+    // console.log(e);
+    // console.log(e.target);
+    // console.log(e.target.className);
+    var edit_str = prompt('수정된 할 일을 적어주세요.');
+    // console.log(edit_str);
+                
+    var els = document.getElementsByClassName(e.target.className);
+    console.log(els);
+    for (var el of els){
+        if (el.tagName === 'LABEL'){
+            el.innerHTML = edit_str;
+            // console.log(edit_lbl.innerHTML);
+        }
+    }
+}
+
+function deleteTodo(e){
+    alert('정말 삭제하시겠습니까?');
+    var els = document.getElementsByClassName(e.target.className);
+    for (var el of els){
+        todo_list.removeChild(el);
+    }
+}
+
 function mouseOver (e){
-    console.log("mouseOver")
+    // console.log("mouseOver")
 }
 
 function mouseOut(e){
-    console.log("mouseOut")
+    // console.log("mouseOut")
 }
  
 input.addEventListener("keyup", function(event){
@@ -56,33 +81,20 @@ input.addEventListener("keyup", function(event){
 
             var btn1 = document.createElement('button');
             btn1.setAttribute('class', 'div'+i);
-            // btn1.setAttribute('class', 'edit');
+            // btn1.setAttribute('class', 'edit'); //설정하면 class 덮어씌워짐. 
             btn1.innerHTML = '수정';
-            btn1.addEventListener('click', function(e){
-                var edit_str = prompt('수정된 할 일을 적어주세요.');
-                console.log(edit_str);
-                
-                var els = document.getElementsByClassName(e.target.className);
-                for (var el of els){
-                    if (el.tagName === 'LABEL'){
-                        el.innerHTML = edit_str;
-                        // console.log(edit_lbl.innerHTML);
 
-                    }
-                }
-            })
+            btn1.addEventListener('click', function(event){ //event 없으면 실행 안됨. 
+                editTodo(event);
+            });
 
             var btn2 = document.createElement('button');
             btn2.setAttribute('class', 'div'+i);
             // btn2.setAttribute('class', 'delete');
             btn2.innerHTML = '삭제';
-            btn2.addEventListener('click', function(e){
-                alert('정말 삭제하시겠습니까?');
-                var els = document.getElementsByClassName(e.target.className);
-                for (var el of els){
-                    todo_list.removeChild(el);
-                }
-            })
+            btn2.addEventListener('click', function(event){
+                deleteTodo(event);
+            });
 
             todo_list.append(div);
             div.appendChild(chk);
