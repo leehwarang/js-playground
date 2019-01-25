@@ -1,37 +1,4 @@
-/**
- * 0. Prettier(formatter), ESLint(linter)
- * 두 가지를 설정하시는 것이 많은 도움이 되실 것 같습니다.
- * https://www.youtube.com/watch?v=ya78lQi5vVI
- * 영상에서는 마치 Visual Studio Code의 Extension인 것처럼 소개되었는데, 그렇지는 않습니다.
- * https://prettier.io/
- * ESLint 관련해서는 아래 페이지를 참고하시면 될 것 같습니다.
- * https://velog.io/@velopert/eslint-and-prettier-in-react
- * https://eslint.org/
- */
-
-//초기화 코드 추가 필요. <- 1. 일반적으로 주석을 쓸 때는 가독성을 위해 // 뒤에 한 칸을 띄어주시면 좋습니다. https://github.com/airbnb/javascript#comments--spaces
-
-var btns = document.getElementsByClassName("btn-num");
-/**
- * 2. document.querySelector
- * 취향 문제일 수 있지만 저는 document.querySelector, document.querySelectorAll 를 선호합니다.
- * id냐 class냐 등의 문제와 상관없이 사용할 수 있기에
- * const $ = document.querySelector;
- * const $$ = document.querySelectorAll;
- * 위와 같이 줄여서 가독성을 확보할 수 있습니다.
-
- * 3. var, let, const
- * 세 가지는 많은 차이점이 있습니다.
- * https://blueshw.github.io/2017/03/28/ES-var-VS-const-VS-let/
-
- * 기능상의 차이점 외에 브라우저 지원율에서도 차이가 존재합니다.
- * https://caniuse.com/#search=let
- * IE를 지원해야 할 경우에는 ES2015를 그대로 사용하면 브라우저가 해석할 수 없으므로 Transpiling을 거쳐야 합니다.
- * https://babeljs.io/
-
- * React 등을 통해 개발할 때는 webpack 등의 bundler를 사용해서 bundling을 거치게 되는데 그 과정에서 babel도 함께 거치곤 합니다.
- * webpack 등과 관련한 부분은 Front-End 개발자들이 가장 괴로워하는 부분 중 하나이므로 나중에 학습하셔도 될 것 같습니다.
- */
+let btns = document.querySelectorAll(".btn-num");
 
 /**
  * 4. 이 아래에 있는 코드들은 class로 묶는 것이 좋겠다고 생각하였습니다.
@@ -39,12 +6,12 @@ var btns = document.getElementsByClassName("btn-num");
  */
 
 // 사용자에 관련된 객체
-var user = {
-  choice_num: [],
+let user = {
+  choice_num: []
 };
 
 // 로또 생성기에 관련된 객체
-var lotto = {
+let lotto = {
   random_btn: [],
   random_num: [],
   bonus_num: 0,
@@ -126,19 +93,18 @@ var lotto = {
     }
   },
   shuffle: function(arr) {
-    for (var i = arr.length; i > 0; i--) {
-      // ++ 또는 --는 다음과 같은 이유로 권장되지 않습니다. https://eslint.org/docs/rules/no-plusplus
-      var pick = Math.floor(Math.random() * i);
+    for (let i = arr.length; i > 0; i -= 1) {
+      let pick = Math.floor(Math.random() * i);
 
-      var temp = arr[i - 1];
+      let temp = arr[i - 1];
       arr[i - 1] = arr[pick];
       arr[pick] = temp;
     }
     return arr;
   },
   random_choice: function() {
-    var dummy = [];
-    for (var i = 1; i < 46; i++) {
+    let dummy = [];
+    for (let i = 1; i < 46; i += 1) {
       dummy.push(i);
     }
 
@@ -153,52 +119,42 @@ var lotto = {
      * `순수 함수` 라는 키워드도 찾아보시면 참 좋을 것 같습니다. (추가적으로는 높은 응집성과 낮은 의존성)
      */
 
-    for (var i = 0; i < 7; i++) {
+    for (let i = 0; i < 7; i += 1) {
       this.random_num.push(dummy[i]);
-      //console.log(this.random_num);
-      //console.log(btns[dummy[i] - 1]);
       this.random_btn.push(btns[dummy[i] - 1]);
-      //console.log(this.random_btn);
 
-      if (i == 6) {
-        this.random_btn[i].style.borderColor = "#FFD740";
-      } else {
-        this.random_btn[i].style.borderColor = "red";
-      }
-      // 위와 같은 케이스도 삼항 연산자를 사용하기 적합한 케이스라고 생각됩니다.
+      i == 6
+        ? (this.random_btn[i].style.borderColor = "#FFD740")
+        : (this.random_btn[i].style.borderColor = "red");
     }
 
-    console.log("로또에서 추첨한 숫자:" + this.random_num);
+    console.log(`로또에서 추첨한 숫자: ${this.random_num}`);
 
-    /**
-     * 15. ES2015부터는 Template literal이라고 해서 문자열 안에 변수를 넣기에 좋아졌습니다.
-     * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals
-     */
-
-    var correct_cnt = this.startCompare();
-    console.log("맞춘 개수: " + correct_cnt);
+    let correct_cnt = this.startCompare();
+    console.log(`맞춘 개수: ${correct_cnt}`);
     this.showResult();
-  },
+  }
 };
 
-//숫자 버튼에 클릭했을 때 이벤트를 저장하는 코드
-document.getElementById("btns-num").addEventListener("click", function(event) {
-  /**
-   * 16. DOM에 이벤트를 붙이는 행위는 DOM이 모두 그려진 뒤에 이루어져야 하므로 `DOMContentLoaded` 시점에 EventListener를 추가하는 것도 좋을 것 같습니다.
-   * https://developer.mozilla.org/ko/docs/Web/Events/DOMContentLoaded
-   *
-   * 17. Event Delegation, Capturing, Bubbling 중에 모르시는 키워드가 있다면 학습하시면 좋을 것 같습니다.
-   * https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
-   * 해보시면 아시겠지만, 사용자가 button tag가 아닌 td tag도 누를 수 있기 때문에, 그런 경우에 대한 처리가 필요합니다.
-   * 관련하여 Event Delegation에 대해 학습하시면 도움이 되실 것 같습니다.
-   */
-  user.choice_num.push(event.target.innerHTML);
-  event.target.style.backgroundColor = "#2196F3";
-  if (user.choice_num.length === 6) {
-    alert("모든 숫자를 다 입력하셨습니다.");
-    console.log("사용자가 입력한 숫자:" + user.choice_num);
-    lotto.random_choice();
-  }
+// 숫자 버튼에 클릭했을 때 이벤트를 저장하는 코드
+/**
+//    * 17. Event Delegation, Capturing, Bubbling 중에 모르시는 키워드가 있다면 학습하시면 좋을 것 같습니다.
+//    * https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+//    * 해보시면 아시겠지만, 사용자가 button tag가 아닌 td tag도 누를 수 있기 때문에, 그런 경우에 대한 처리가 필요합니다.
+//    * 관련하여 Event Delegation에 대해 학습하시면 도움이 되실 것 같습니다.
+//    */
+document.addEventListener("DOMContentLoaded", function() {
+  document
+    .querySelector(".btns-num")
+    .addEventListener("click", function(event) {
+      user.choice_num.push(event.target.innerHTML);
+      event.target.style.backgroundColor = "#2196F3";
+      if (user.choice_num.length === 6) {
+        alert("모든 숫자를 다 입력하셨습니다.");
+        console.log("사용자가 입력한 숫자:" + user.choice_num);
+        lotto.random_choice();
+      }
+    });
 });
 
 /**
