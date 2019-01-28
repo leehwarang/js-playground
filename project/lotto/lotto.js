@@ -17,61 +17,34 @@ let lotto = {
   bonus_num: 0,
   cnt: 0,
   bonusCompare: function() {
-    /**
-     * 5. 이런 목적에는 Array method 중에 적합한 것이 있습니다.
-     * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/some
-     * MDN 문서에 나와있는 Array method 들을 몇 번 읽어보셔서 프로그래밍 하실 때 어? 이때 적합한 method가 있었던 것 같은데.. 정도로 떠올리실 수 있게 되면 좋을 것 같습니다.
-     */
-    for (var k = 0; k < this.random_num.length; k++) {
-      if (this.bonus_num === this.random_num[k]) {
-        return true;
-      }
-    }
+    return user.choice_num.includes(String(this.bonus_num));
   },
-  startCompare: function() {
-    /**
-     * 6. 프로그래밍에서 가장 어려운 것중 하나가 작명입니다.
-     * start를 붙여서 얻는 이득이 없다면 다른 이름으로 바꿔도 좋을 것 같습니다.
-     */
-    cnt = 0;
-    bonus_num = this.random_num.pop();
-    for (var i = 0; i < this.random_num.length; i++) {
-      for (var j = 0; j < user.choice_num.length; j++) {
-        if (this.random_num[i] == user.choice_num[j]) {
-          cnt += 1;
-        }
+  Compare: function() {
+    this.cnt = 0;
+    this.bonus_num = this.random_num.pop();
+    console.log(this.bonus_num);
+
+    for (let i = 0; i < user.choice_num.length; i += 1) {
+      if (this.random_num.includes(Number(user.choice_num[i]))) {
+        this.cnt += 1;
       }
     }
+    return this.cnt;
     /**
-     * 7. 의도하신 것은 this.cnt 이실텐데 실제로는 var가 없는 것으로 인해 window.cnt에 0을 할당한 결과가 발생했을 것입니다.
-     * scope chaining을 거치면서 이름이 같은 cnt를 참조하게 된 것이어서 아래 라인은 this.cnt = 0이 되었어야 합니다. (bonus_num도 동일)
-     * https://boycoding.tistory.com/29
-     * http://www.nextree.co.kr/p7363/
-     */
-
-    return cnt;
-    /**
-     * 8. 같은 기능이라면 언어에서 제공해주는 방법으로 해결하는 것이 좋습니다.
-     * 가독성 측면에서도 그렇고, 부차적으로는 브라우저가 계속해서 업데이트되면서 언어 내장 메소드들의 성능이 좋아지기 때문입니다.
-
      * 9. Array를 모두 순회해야 한다면 사용해야 하는 메소드들이 있습니다.
      * (순회하면서 하는 역할에 따라 reduce, map, filter, find, find 등)
      * 이때는 순회하면서 this.random_num에 포함되어있는지 여부에 따른 횟수를 합산해야 하므로 첫 번째 for문은 reduce로 대체해도 좋을 것 같습니다.
-     * 포함되어있는지 여부를 검사해야 하는 두 번째 for문은 아래 includes로 대체하면 좋을 것 같습니다
-     * https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
-     * 다만 코드가 동작하는 환경에 따라선 사용하지 못할 수도 있습니다. https://caniuse.com/#search=includes
 
      * 10. array는 포함여부를 검사하려면 계속해서 모두 순회해야하므로 이 경우에는 적합하지 않습니다.
      * 숫자가 선택될 때마다 객체에 저장해놓고 값을 조회했을 때의 true/false 여부로 숫자 일치 여부를 확인하면 퍼포먼스적으로 훨씬 좋을 것 같습니다.
      */
   },
   showResult: function() {
-    console.log(bonusCompare);
     // 11. alert 안에 있는 메시지들이 반복되므로 message를 만드는 함수 등으로 중복을 제거하면 좋을 것 같습니다.
     if (this.cnt === 6) {
       alert("축하합니다! 1등이에요!");
     } else if (this.cnt === 5) {
-      if (bonusCompare() === true) {
+      if (this.bonusCompare()) {
         // 12. 7번과 달리 window 밑에서 참조할 수 없으므로 Uncaught ReferenceError: bonusCompare is not defined 가 발생할 것 같습니다.
         alert("축하합니다! 2등이에요!");
       } else {
@@ -130,7 +103,7 @@ let lotto = {
 
     console.log(`로또에서 추첨한 숫자: ${this.random_num}`);
 
-    let correct_cnt = this.startCompare();
+    let correct_cnt = this.Compare();
     console.log(`맞춘 개수: ${correct_cnt}`);
     this.showResult();
   }
