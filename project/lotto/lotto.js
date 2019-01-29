@@ -51,11 +51,9 @@ let lotto = {
       case 6:
         this.grade[this.cnt + 1] = 1;
       case 5:
-        if (this.bonusCompare()) {
-          this.grade[this.cnt + 1] = 2;
-        } else {
-          this.grade[this.cnt] = 3;
-        }
+        this.bonusCompare()
+          ? (this.grade[this.cnt + 1] = 2)
+          : (this.grade[this.cnt] = 3);
       case 4:
         this.grade[this.cnt] = 4;
       case 3:
