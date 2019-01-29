@@ -16,6 +16,7 @@ let lotto = {
   random_num: [],
   bonus_num: 0,
   cnt: 0,
+  grade: [],
   bonusCompare: function() {
     return user.choice_num.includes(String(this.bonus_num));
   },
@@ -39,31 +40,30 @@ let lotto = {
      * 숫자가 선택될 때마다 객체에 저장해놓고 값을 조회했을 때의 true/false 여부로 숫자 일치 여부를 확인하면 퍼포먼스적으로 훨씬 좋을 것 같습니다.
      */
   },
+  message: function(cnt) {
+    cnt < 3
+      ? alert("꽝입니다.")
+      : alert(`축하합니다! ${this.grade[cnt]} 등이에요!`);
+  },
   showResult: function() {
-    // 11. alert 안에 있는 메시지들이 반복되므로 message를 만드는 함수 등으로 중복을 제거하면 좋을 것 같습니다.
-    if (this.cnt === 6) {
-      alert("축하합니다! 1등이에요!");
-    } else if (this.cnt === 5) {
-      if (this.bonusCompare()) {
-        // 12. 7번과 달리 window 밑에서 참조할 수 없으므로 Uncaught ReferenceError: bonusCompare is not defined 가 발생할 것 같습니다.
-        alert("축하합니다! 2등이에요!");
-      } else {
-        alert("축하합니다! 3등이에요!");
-      }
-      /**
-       * 13. bonusCompere() 가 반환하는 값이 boolean 타입이므로 `if (bonusCompare())` 도 좋을 것 같습니다.
-       * 또한 이때는 true/false에 따라 다른 값을 리턴해주는 상황이니 삼항연산자도 고려해볼 수 있을 것 같습니다.
-       * (true/false의 차이에 따라 2 또는 3)
-       * 그런 점에서 6은 1, 5는 2 등 각각 숫자에 등수를 매핑할 수 있다면 showResult 자체가 매우 짧아질 수 있을 것 같습니다.
-       * (gradeMap[6] === 1)
-       */
-    } else if (this.cnt === 4) {
-      alert("축하합니다! 4등이에요!");
-    } else if (this.cnt === 3) {
-      alert("축하합니다! 4등이에요!");
-    } else {
-      alert("꽝!");
+    console.log(`맞춘 개수: ${this.cnt}`);
+    switch (this.cnt) {
+      case 6:
+        this.grade[this.cnt + 1] = 1;
+      case 5:
+        if (this.bonusCompare()) {
+          this.grade[this.cnt + 1] = 2;
+        } else {
+          this.grade[this.cnt] = 3;
+        }
+      case 4:
+        this.grade[this.cnt] = 4;
+      case 3:
+        this.grade[this.cnt] = 3;
+      default:
+        this.grade[this.cnt] = 0;
     }
+    this.message(this.cnt);
   },
   shuffle: function(arr) {
     for (let i = arr.length; i > 0; i -= 1) {
@@ -103,8 +103,8 @@ let lotto = {
 
     console.log(`로또에서 추첨한 숫자: ${this.random_num}`);
 
-    let correct_cnt = this.Compare();
-    console.log(`맞춘 개수: ${correct_cnt}`);
+    this.Compare();
+    console.log(`맞춘 개수: ${this.cnt}`);
     this.showResult();
   }
 };
