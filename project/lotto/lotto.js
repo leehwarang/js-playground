@@ -10,6 +10,12 @@ let user = {
   choice_num: []
 };
 
+class UserNumber {
+  constructor(number) {
+    this.number = number;
+  }
+}
+
 // 로또 생성기에 관련된 객체
 let lotto = {
   random_btn: [],
@@ -18,7 +24,7 @@ let lotto = {
   cnt: 0,
   grade: [],
   bonusCompare: function() {
-    return user.choice_num.includes(String(this.bonus_num));
+    return user.choice_num.includes(this.bonus_num);
   },
   Compare: function() {
     this.cnt = 0;
@@ -26,11 +32,12 @@ let lotto = {
     console.log(this.bonus_num);
 
     for (let i = 0; i < user.choice_num.length; i += 1) {
-      if (this.random_num.includes(Number(user.choice_num[i]))) {
+      if (this.random_num.includes(user.choice_num[i])) {
         this.cnt += 1;
       }
     }
     return this.cnt;
+
     /**
      * 9. Array를 모두 순회해야 한다면 사용해야 하는 메소드들이 있습니다.
      * (순회하면서 하는 역할에 따라 reduce, map, filter, find, find 등)
@@ -63,36 +70,28 @@ let lotto = {
     }
     this.message(this.cnt);
   },
-  shuffle: function(arr) {
-    for (let i = arr.length; i > 0; i -= 1) {
-      let pick = Math.floor(Math.random() * i);
-
-      let temp = arr[i - 1];
-      arr[i - 1] = arr[pick];
-      arr[pick] = temp;
-    }
-    return arr;
-  },
-  random_choice: function() {
+  shuffle: function() {
     let dummy = [];
     for (let i = 1; i < 46; i += 1) {
       dummy.push(i);
     }
 
-    this.shuffle(dummy);
+    for (let i = dummy.length; i > 0; i -= 1) {
+      let pick = Math.floor(Math.random() * i);
 
-    /**
-     * 14. call by value, call by reference
-     * 지금의 로직은 위 키워드와 관련이 있고 중요한 부분이므로 꼭 이해하고 넘어가시면 좋을 것 같습니다.
+      let temp = dummy[i - 1];
+      dummy[i - 1] = dummy[pick];
+      dummy[pick] = temp;
+    }
+    return dummy;
+  },
 
-     * 아래 부분은 짧게 설명드리기 어려운 부분이고, 정답이 없는 영역이지만 참고삼아 남겨봅니다.
-     * 위 로직은 딱 저 순서대로 실행해야만 동작하는 로직이고, return 값으로 소통하는 것이 아니라서 나중에 디버깅이 쉽지 않을 수도 있습니다.
-     * `순수 함수` 라는 키워드도 찾아보시면 참 좋을 것 같습니다. (추가적으로는 높은 응집성과 낮은 의존성)
-     */
+  random_choice: function() {
+    let after_shuffle = this.shuffle();
 
     for (let i = 0; i < 7; i += 1) {
-      this.random_num.push(dummy[i]);
-      this.random_btn.push(btns[dummy[i] - 1]);
+      this.random_num.push(after_shuffle[i]);
+      this.random_btn.push(btns[after_shuffle[i] - 1]);
 
       i == 6
         ? (this.random_btn[i].style.borderColor = "#FFD740")
@@ -118,7 +117,9 @@ document.addEventListener("DOMContentLoaded", function() {
   document
     .querySelector(".btns-num")
     .addEventListener("click", function(event) {
-      user.choice_num.push(event.target.innerHTML);
+      user.choice_num.push(Number(event.target.innerHTML));
+      let b1 = new UserNumber(Number(event.target.innerHTML));
+      // console.log(b1);
       event.target.style.backgroundColor = "#2196F3";
       if (user.choice_num.length === 6) {
         alert("모든 숫자를 다 입력하셨습니다.");
