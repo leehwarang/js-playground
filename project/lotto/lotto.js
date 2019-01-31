@@ -7,13 +7,11 @@ let btns = document.querySelectorAll(".btn-num");
  * 10. array는 포함여부를 검사하려면 계속해서 모두 순회해야하므로 이 경우에는 적합하지 않습니다.
  * 숫자가 선택될 때마다 객체에 저장해놓고 값을 조회했을 때의 true/false 여부로 숫자 일치 여부를 확인하면 퍼포먼스적으로 훨씬 좋을 것 같습니다.
  *
- * -> 위 두 피드백에 대해 UserNumber class를 생성하고 클릭할 때 마다 UserNumber 객체를 만들었지만,
+ * -> 위 두 피드백에 대해 UserNumber class를 생성하고 클릭할 때 마다 UserNumber 객체를 만들어봤었지만,
  * 후에 lotto.random_choice에서 어떻게 비교해야 하는지  잘 모르겠습니다.
- */
-
-/**
-class UserNumber {
-  constructor(number) {
+ * 
+ * class UserNumber {
+    constructor(number) {
     this.number = number;
   }
 }
@@ -115,16 +113,10 @@ let lotto = {
 };
 
 // 숫자 버튼에 클릭했을 때 이벤트를 저장하는 코드
-/**
-//    * 17. Event Delegation, Capturing, Bubbling 중에 모르시는 키워드가 있다면 학습하시면 좋을 것 같습니다.
-//    * https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
-//    * 해보시면 아시겠지만, 사용자가 button tag가 아닌 td tag도 누를 수 있기 때문에, 그런 경우에 대한 처리가 필요합니다.
-//    * 관련하여 Event Delegation에 대해 학습하시면 도움이 되실 것 같습니다.
-//    */
 document.addEventListener("DOMContentLoaded", function() {
-  document
-    .querySelector(".btns-num")
-    .addEventListener("click", function(event) {
+  let btns = document.querySelectorAll(".btn-num");
+  for (let btn of btns) {
+    btn.addEventListener("click", function(event) {
       user.choice_num.push(Number(event.target.innerHTML));
       // let b1 = new UserNumber(Number(event.target.innerHTML));
       event.target.style.backgroundColor = "#2196F3";
@@ -134,8 +126,8 @@ document.addEventListener("DOMContentLoaded", function() {
         lotto.random_choice();
       }
     });
+  }
 });
-
 /**
  * 이전 피드백 적용 후 추가 기능 구현 예정
  * 18. 게임이 끝난 뒤에 재시작할 수 있는 기능이 필요할 것 같습니다.
