@@ -1,7 +1,4 @@
 var board = document.querySelector("#board");
-var btns = document.querySelectorAll(".btn-num");
-var operators = document.querySelectorAll(".btn-op");
-var bs = document.querySelector(".btn-bs");
 board.innerHTML = "0";
 
 var calculator = {
@@ -50,25 +47,22 @@ calculator.prepare = function() {
   this.btn_list.push(String(result));
 };
 
-for (var btn of btns) {
-  btn.addEventListener("click", function(e) {
+var btns = document.querySelector(".btn-list");
+btns.addEventListener("click", function(e) {
+  if (e.target.className === "btn-num") {
     calculator.btn_list.push(e.target.innerHTML);
     calculator.displayboard();
-  });
-}
-
-for (var op of operators) {
-  op.addEventListener("click", function(e) {
+  } else if (e.target.className === "btn-op") {
     if (e.target.innerHTML === "=") {
       calculator.prepare();
     } else {
       calculator.btn_list.push(" " + e.target.innerHTML + " ");
       calculator.displayboard();
     }
-  });
-}
+  } else if (e.target.className === "btn-bs") {
+    calculator.btn_list.pop();
+    calculator.displayboard();
+  }
 
-bs.addEventListener("click", function(e) {
-  calculator.btn_list.pop();
-  calculator.displayboard();
+  console.log(e.target.className);
 });
