@@ -1,6 +1,24 @@
 var board = document.querySelector("#board");
 board.innerHTML = "0";
 
+var btns = document.querySelector(".btn-list");
+btns.addEventListener("click", function(e) {
+  if (e.target.className === "btn-num") {
+    calculator.btn_list.push(e.target.innerHTML);
+    calculator.displayboard();
+  } else if (e.target.className === "btn-op") {
+    if (e.target.innerHTML === "=") {
+      calculator.prepare();
+    } else {
+      calculator.btn_list.push(" " + e.target.innerHTML + " ");
+      calculator.displayboard();
+    }
+  } else if (e.target.className === "btn-bs") {
+    calculator.btn_list.pop();
+    calculator.displayboard();
+  }
+});
+
 var calculator = {
   str: "",
   btn_list: []
@@ -23,46 +41,20 @@ calculator.start = function(first_num, op, second_num) {
       result = Number(first_num) * Number(second_num);
       break;
     case "/":
-      result = first_num / second_num;
+      result = Math.floor(Number(first_num) / Number(second_num));
       break;
   }
   return result;
 };
 
 calculator.prepare = function() {
-  console.log("계산 준비!");
   this.btn_list = this.str.split(" ");
-  console.log(this.btn_list);
   var result = this.btn_list.shift();
-  console.log(result);
   while (this.btn_list.length != 0) {
     var op = this.btn_list.shift();
-    console.log(op);
     var second_num = this.btn_list.shift();
-    console.log(second_num);
     result = this.start(result, op, second_num);
-    console.log(result);
   }
   board.innerHTML = result;
   this.btn_list.push(String(result));
 };
-
-var btns = document.querySelector(".btn-list");
-btns.addEventListener("click", function(e) {
-  if (e.target.className === "btn-num") {
-    calculator.btn_list.push(e.target.innerHTML);
-    calculator.displayboard();
-  } else if (e.target.className === "btn-op") {
-    if (e.target.innerHTML === "=") {
-      calculator.prepare();
-    } else {
-      calculator.btn_list.push(" " + e.target.innerHTML + " ");
-      calculator.displayboard();
-    }
-  } else if (e.target.className === "btn-bs") {
-    calculator.btn_list.pop();
-    calculator.displayboard();
-  }
-
-  console.log(e.target.className);
-});
